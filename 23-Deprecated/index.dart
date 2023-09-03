@@ -1,0 +1,1 @@
+//bu kısmı sonradan araştır bul.
