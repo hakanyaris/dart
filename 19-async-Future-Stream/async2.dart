@@ -6,8 +6,8 @@ print('başlangıç');
 await Future.forEach([1,2,3,4,5,6], (int element) async {
 
    await Future.delayed(Duration(seconds: 2));
-   print('işlem bitti');
-
+   print('işlem bitti $element');
+  
 });
 
 print('son');

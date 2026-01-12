@@ -3,102 +3,89 @@
 import 'dart:io';
 
 void main(List<String> args) {
-//1- functionBir içinde functionIki içinde kullandık 
-functionBir(functionIki);
+  //1- functionBir içinde functionIki içinde kullandık
+  functionBir(functionIki);
 
-//3- Bazen   ard arda yapılan veritabanına bir şey ekleme ve sonra da listeyi ekranda yazdırma durumlarında  veritabanına ekleme işlemi uzun 
-//sürüp ekranda yazdırma işlemileri kısa sürdüğü için  bu gibi durumlarda  eklediğimiz eleman geç  eklendiği için yazdırma işlemi ekleme işlem-
-//iden önce çalışır ve eklenen eleman görülmez.bu gibi durumları önlemek için  callback ları kullanıyoruz.
- 
- var Liste=['post1','post2','post3'];
+  //3- Bazen   ard arda yapılan veritabanına bir şey ekleme ve sonra da listeyi ekranda yazdırma durumlarında  veritabanına ekleme işlemi uzun
+  //sürüp ekranda yazdırma işlemileri kısa sürdüğü için  bu gibi durumlarda  eklediğimiz eleman geç  eklendiği için yazdırma işlemi ekleme işlem-
+  //iden önce çalışır ve eklenen eleman görülmez.bu gibi durumları önlemek için  callback ları kullanıyoruz.
 
-              // callBack metortu ile  31. satırdaki, postEkle('post4',postYazdir);  postyazdır fonk eşleşiyor.
-              // callBack ile
- postEkle(post,callBack) {
- Future.delayed(Duration(seconds:2))//2 saniye bunu bekler 
-                .whenComplete(() {
-                  Liste.add(post);
-                  callBack(Liste);//31 satırdaki postYazdır metodu çalışır.8 sn de bunu bekler.
-                  });
+  var Liste = ['post1', 'post2', 'post3'];
 
-    
- }
- postYazdir(diziIslem) {
-  Future.delayed(Duration(seconds:8))
-                 .whenComplete((){
-                  for (var a in diziIslem){
-                  print(a);
-                  }
-                  });
- 
+  // callBack metoDu ile  33. satırdaki, postEkle('post4',postYazdir);  postyazdır fonk eşleşiyor.
+  // callBack ile
+  postEkle(post, callBack) {
+    Future.delayed(Duration(seconds: 2)) //2 saniye bunu bekler
+        .whenComplete(() {
+          Liste.add(post);
+          callBack(
+            Liste,
+          ); // postYazdır(Liste) metodu çalışır.8 sn de bunu bekler.
+        });
   }
-                     
-  postEkle('post4',postYazdir);
+
+  postYazdir(diziIslem) {
+    Future.delayed(Duration(seconds: 8)).whenComplete(() {
+      for (var a in diziIslem) {
+        print(a);
+      }
+    });
+  }
+
+  postEkle('post4', postYazdir);
   // postYazdir(Liste);
 
+  final user = User(money: 6);
+  user.colculateMoney(); //bu metotu çağırdığımızda money e 5 ekler ama moneyin değerini ekrana yazdıramayız.
+  //ekrana yazdırmak için ağağıdaki durumu kullanmak durumnda kalırız.bu durumdan kurtulmak için callbacklardan yararlanırız.
+  //user2 colculateMoney callback ekleyerk moneyi  direkt fonksiyonun içine callback ekleyerek ekranda gösterme işlemi yaptık.
+  print('user money; ${user.money}');
 
-
-
-final user=User(money: 6);
-user.colculateMoney();//bu metotu çağırdığımızda money e 5 ekler ama moneyin değerini ekrana yazdıramayız.
-//ekrana yazdırmak için ağağıdaki durumu kullanmak durumnda kalırız.bu durumdan kurtulmak için callbacklardan yararlanırız.
-//user2 colculateMoney callback ekleyerk moneyi  direkt fonksiyonun içine callback ekleyerek ekranda gösterme işlemi yaptık.
-print('user money; ${user.money}');
-
-
-
-
-//user2 colculateMoney fonksiyonuna callback ekleyerk moneyi  direkt fonksiyonun içinde ekranda gösterme işlemi yaptık.
- final user2 =User2(money: 5);
-  user2.calculateMoney((int result)//result
+  //user2 colculateMoney fonksiyonuna callback ekleyerk moneyi  direkt fonksiyonun içinde ekranda gösterme işlemi yaptık.
+  final user2 = User2(money: 5);
+  user2.calculateMoney((int result) //result
   {
-        print('user2 money $result');
+    print('user2 money $result');
   });
-
-
 }
 
-
-
-//4- 
+//4-
 class User {
-int money;
-  User({
-    required this.money,
-  });
-
-  
-  void colculateMoney(){
-    money +=5;
-    
-  }
-
-
-}
-class User2{
   int money;
-  User2({
-    required this.money,
-  });
+  User({required this.money});
 
-//fonksiyon içined parametre olarak fonksiyon istedik 
-void calculateMoney(void Function (int data) onComplate){
-                  //void yerine int yazıp aşağıda retur ile geriye(maine) sayı gönderebilirdik.
-money+=5;
-onComplate(money);//Oncomplate fonksiyonuna money i gönderiyoruz.main de çalışacak calculateMoney fonksiyonuna  moneyi gönderiyoruz
+  void colculateMoney() {
+    money += 5;
+  }
 }
-  
+
+class User2 {
+  int money;
+  User2({required this.money});
+
+  //fonksiyon içined parametre olarak fonksiyon istedik.
+  //                                 // int değeri alan retrun u boş bir fonksiyon istedik return kısmı fonksiyon çağrılınca mainde doldurulacak
+  void calculateMoney(void Function(int data) onComplate) {
+    //void yerine int yazıp aşağıda retur ile geriye(maine) sayı gönderebilirdik.
+    money += 5;
+    //onComplate fonksiyonu  retrunu yukarıda(mainde) tanımlanmıştır.
+    onComplate(
+      money,
+    ); //Oncomplate fonksiyonuna money i gönderiyoruz.main de çalışacak calculateMoney fonksiyonuna  moneyi gönderiyoruz
+  }
 }
+
 //2-
-void functionBir(callback ) {
- 
-//  await Future.delayed(Duration(seconds: 2));
- 
+// callback  dynamic bir değer tipdedir .void içinde fonksiyon verdiğimizde callback fonksiyon türüne dönüşür.
+//callbak herhenagi bir isimlendirmedir .başka bir isimde kullanabilirdik.
+void functionBir(callback) {
+  //  await Future.delayed(Duration(seconds: 2));
+
   print('birinci fonksiyon');
   sleep(Duration(seconds: 5));
   callback();
 }
-void functionIki() {
 
+void functionIki() {
   print('ikinci fonksiyon');
 }

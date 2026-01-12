@@ -1,3 +1,7 @@
+
+//Generic ismiyle adlandırdığımız yapılar, bir method ya da bir classın, yazılımcının türden bağımsız olarak
+// oluşturduğu, kullanıldığı yere göre türlerinin belirlenip bu tür üzerinden işlem yapılmasını sağlayan yapılardır.
+//
 void main(List<String> args) {
   var user1 =
       User(data: 'Ali'); // 2- ALİ verdiğimiz için T  generiği  String olur

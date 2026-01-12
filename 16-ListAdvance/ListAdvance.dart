@@ -60,7 +60,7 @@ void main() {
   } else {
     print('elimizde yok');
   }
-//burda bu araba elimizde olmasında rağmen elimizde yok geldi yani isHaveCar false geldi çünkü 13 dersin 6 satırından incelersek iki clası karşılaştımanın özünü anlarız.
+//burda bu araba elimizde olmasına rağmen elimizde yok geldi yani isHaveCar false geldi çünkü 13 dersin 6 satırından incelersek iki clası karşılaştımanın özünü anlarız.
 //fakat burada biz == operatörü  Car sınıfına eklersek düzelir (equels metotu ekledik.)
 
 //yeni gelen arabanın index numasını bulalım
@@ -83,7 +83,8 @@ void main() {
   final CarNames = carsItem.map((e) => e.name).join(',');
   print('araba isimleri: $CarNames');
 
-//mersedes marka araba var mı?olmadığı için hata verecek ve try catch kullanarak  hata mesajını kontrol altına alacağız.
+//mersedes marka araba var mı?olmadığı için hata verecek ve try catch kullanarak  hata mesajını kon
+//trol altına alacağız.
 
   try {
     //singleWhere metodu ile listede elimizde o elemandan 1 tane var mı diye kontrol eder sonuç olarak elemanın kendisini döndürür.
@@ -110,6 +111,7 @@ void main() {
   carsItem.sort(((a, b) => b.money.compareTo(a.money)));
   print(carsItem);
 
+// newCar ögesini ilk gördüğü indexi döndürür. olmasaydı -1 dönerdi.
   final index2 = carsItem.indexOf(newCar);
   print(index2);
 

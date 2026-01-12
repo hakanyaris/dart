@@ -1,11 +1,11 @@
-
-
+//Her nesne bir sınıfın örneğidir ve Null dışındaki tüm sınıflar Object'ten türer.
+import 'dart:math';
 
 void main() {
-// dart dili hiçbir nesneyi başıboş tanımlamasını istemez.yani nesneler ya değer atayacağız ya fa
+// dart dili hiçbir nesneyi başıboş tanımlamasını istemez.yani nesneler ya değer atayacağız ya da
   // ? koyup null dönebilir diyeceğiz
   int a;
-// print(a); a değişkenini bu şekilde yazamayız .
+// print(a); a değişkenini bu şekilde yazamayız .//sınıfların içinde
 
   int c = 0; //ya  bu şekilde değer atamalıyız.
   int? b;
@@ -25,7 +25,7 @@ void main() {
     100,
     null,
     0
-  ]; // listedeki bir eleman null deperi alabiliyorsa ? koymalıyız.
+  ]; // listedeki bir eleman null değeri alabiliyorsa ? koymalıyız.
 
   for (var item in costamerMoneys) {
     if (item != null) {
@@ -45,7 +45,7 @@ void main() {
   }
 
   print('---------------------------------------');
-  User user1 = User(id: '1', 'vb', 15, age: 21, city: 'aaa');
+  User user1 = User(id: '1', 'vb', age: 3, 15, city: 'aaa');
   User user2 = User(id: '2', 'vb2', 15, age: null, city: null);
   final user3 = User(id: '3', 'vb3', 13, age: 70);
   print(user3.userCode);
@@ -79,8 +79,31 @@ void main() {
 
   User4 user5 = User4(name: 'name', money: 42, age: 18, city: 'city');
   //user5.  dediğimde hiçbir prooerti görünmez çünkü User5 clasında hepsi private
+  //
+  //İki özdeş derleme zamanı sabiti oluşturmak tek bir kanonik örnekle sonuçlanır: aşğaıda oluşturulan iki örnek derleme zamanı oluşturulduğu için denktir.
+  var araba1 = const Araba('ali');
+  var araba2 = const Araba('ali');
+  print('araba');
+  print(araba1.tur);
+  assert(identical(araba1, araba2));
+
+  const pointAndLine = const {
+    'point': const [const Araba('hakan')],
+    'line': const [const Araba('ali'), const Araba('kenan')],
+  };
+
+  // pointAndLine['point']
 } //main bitiş
 
+//
+//---------------------------------------------------------------------------------
+
+///--------------------------------------------------------------
+///---------------------------------------------------------------
+//////---------------------------------------------------------------
+//////---------------------------------------------------------------
+//////---------------------------------------------------------------
+//////---------------------------------------------------------------
 //---------------------------------------------------------------------------------
 
 //yeni bir metot olsun  null olanları(hesabı olmayan) veya 0 değeri olanları  null sayalım.
@@ -96,16 +119,11 @@ int? controlMoneys(
   //not;null döndürebilen bir metot da return yazmazsak geriye otomatik null döndürür.
 }
 
-//
-//
-//---------------------------------------------------------------------------------
-
 // aşağıdaki sınıfta adı ve parası olmak zorunda ama yaşı ve city verilmeyebilir.
 //city değeri gelmezse null olursa default olarak istanbul ata .
-
 class User {
   //final sonradan değer atanmama durumudur . class(obje)oluşturma sürecinde  bir propertiese(özelliğe) final
-  // eklersen bunu sadece  yapısı metot(consakcır)da kullanabiliriz.Sadece late eklersek istediğimiz zaman her
+  // eklersen bunu sadece  yapıcı metot(consakcır)da kullanabiliriz.Sadece late eklersek istediğimiz zaman her
   //yerde kullanabiliriz.
   //final yazdığımız propertiesler sınıf main de newlenirken  bir değer atarız daha sonra bu değeri
   // değiştiremeyiz anlamındadır.Yani name  özellğine sınıf newlenirken Ahmet dersek daha sonra onu ali ile
@@ -122,6 +140,7 @@ class User {
   //Not;  {} içine yazılan propertiesler 1- eğer tanımlanırken(yukarıda) late almışsa yapıcı
   //metot içinde required almak zorundadır.2- eğer late almayıp  ? null alabilir yaparsak(yukarıda)
   //requiren yazmamıza gerek yok.   Yani {} içine çıplak bir şekilde this.id diye tanımlayamayız.
+  //3- late almayıp ? da koymazsak {} de requirede koymalıyız.
 
   //reqired yani id girilmek zorunda // bu nedenle id propertiesine ? özelliği eklemek zorunda değiliz.
   User(String name, int money, {required this.id, int? age, String? city}) {
@@ -149,6 +168,7 @@ class User {
 }
 
 //------------------------------------------------------
+//------------------------------------------------------
 
 //burada yapıcı metotu konsakcırı daha pratik tanımlayacağız.
 //id değişkenine sadece bu sınıf içinden erişebilisin  private yapma  (değişken isminin başına _ koyulur)Eğer
@@ -172,7 +192,7 @@ class User2 {
 }
 
 //-------------------------------------------------------
-
+//------------------------------------------------------
 class User3 {
   String? name;
   int? money;
@@ -197,7 +217,8 @@ class User4 {
         _age = age,
         _city = city;
 }
-
+//------------------------------------------------------
+//------------------------------------------------------
 //servis kullanımı (veirleri internetten çekiyorsak) en ideal kullanım
 
 class User5 {
@@ -207,4 +228,30 @@ class User5 {
   final String? city;
 
   User5({this.name, this.money, this.age, this.city});
+}
+
+//-------------------------------------------------------------
+//Bazı sınıflar sabit(const) oluşturucular sağlar . Sabit bir oluşturucu kullanarak derleme zamanı sabiti
+//oluşturmak için, constoluşturucu adından önce anahtar sözcüğü koyun:
+class Araba {
+  static const Araba araba = Araba('dacia');
+  final String tur;
+  const Araba(this.tur);
+}
+
+const double xOrigin = 0;
+const double yOrigin = 0;
+
+class Point {
+  final double x;
+  final double y;
+
+  // Sets the x and y instance variables
+  // before the constructor body runs.
+  Point(this.x, this.y);
+
+  // Named constructor
+  Point.origin()
+      : x = xOrigin,
+        y = yOrigin;
 }
