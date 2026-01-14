@@ -5,7 +5,7 @@ void main() {
   // print(a);
 
   print("eşit mi: ${users.name}"); //ali değeri admine eşit mi
-
+ // eklendi
   final dayselect1 = days.cuma;
   if (dayselect1.checkDay('cuma')) {
     print('cuma');
