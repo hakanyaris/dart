@@ -140,7 +140,8 @@ class User {
   //Not;  {} içine yazılan propertiesler 1- eğer tanımlanırken(yukarıda) late almışsa yapıcı
   //metot içinde required almak zorundadır.2- eğer late almayıp  ? null alabilir yaparsak(yukarıda)
   //requiren yazmamıza gerek yok.   Yani {} içine çıplak bir şekilde this.id diye tanımlayamayız.
-  //3- late almayıp ? da koymazsak {} de requirede koymalıyız.
+  //3- late almayıp ? da koymazsak {} de requ
+  // irede koymalıyız.
 
   //reqired yani id girilmek zorunda // bu nedenle id propertiesine ? özelliği eklemek zorunda değiliz.
   User(String name, int money, {required this.id, int? age, String? city}) {
