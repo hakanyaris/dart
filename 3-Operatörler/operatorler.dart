@@ -72,4 +72,49 @@ void main() {
   for (var element in dogalSayilar) {
     print(element);
   }
+
+  List<int>? dynamicList; // Henüz initialize edilmemiş, yani null.
+
+  // Eğer sadece ... kullansaydık uygulama çökerdi.
+  // ...? sayesinde dynamicList null ise hiçbir şey eklemeden devam eder.
+  var myNumbers = [10, 20, ...?dynamicList];
+
+  /*List<Widget> sosyalButonlar = [
+    ElevatedButton(onPressed: () {}, child: Text("Google ile Bağlan")),
+    ElevatedButton(onPressed: () {}, child: Text("Apple ile Bağlan")),
+  ];
+
+  return Column(
+    children: [
+      Text("Lütfen giriş yapın"),
+      // Listeyi doğrudan Column children içerisine yayıyoruz
+      ...sosyalButonlar, 
+      Text("Kullanıcı Sözleşmesi"),
+    ],
+  );*/
+
+  //---------------------------------
+
+  /*   Widget build(BuildContext context) {
+  bool isLoggedIn = true; // Kullanıcının giriş yapma durumu
+
+  return Column(
+    children: [
+      const Text("Profil Sayfası"),
+      
+      // Eğer kullanıcı giriş yaptıysa profil detay widget'larını listeye yay
+      if (isLoggedIn) ...[
+        const Text("Hoş geldiniz, Ahmet!"),
+        ElevatedButton(onPressed: () {}, child: const Text("Çıkış Yap")),
+      ] else ...[
+        // Giriş yapmadıysa giriş form elemanlarını yay
+        const Text("Lütfen devam etmek için giriş yapın."),
+        ElevatedButton(onPressed: () {}, child: const Text("Giriş Yap")),
+      ],
+      
+      const Text("Uygulama Sürümü: v2.4.0"),
+    ],
+  );
+}
+ */
 }
